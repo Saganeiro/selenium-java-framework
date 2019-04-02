@@ -24,7 +24,7 @@ public class ProductsPage {
     }
 
     public void addBackpackToCard() {
-        imageShoppingCart.click();
+        buttonAddToCardBackpack.click();
     }
 
 
