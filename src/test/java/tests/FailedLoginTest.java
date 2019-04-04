@@ -16,7 +16,7 @@ public class FailedLoginTest extends TestBase {
     @Test
     public void loginWithIncorrectCredencials(){
 
-        LoginPage loginPage = new LoginPage(driver);
+        LoginPage loginPage = new LoginPage();
         loginPage.typeUsername("standard_user");
         loginPage.typePassword("incorrect_password");
         loginPage.clickLoginButton();

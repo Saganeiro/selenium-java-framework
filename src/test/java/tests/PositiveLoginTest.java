@@ -11,12 +11,12 @@ public class PositiveLoginTest extends TestBase {
     @Test
     public void PositiveLoginTest(){
 
-        LoginPage loginPage = new LoginPage(driver);
+        LoginPage loginPage = new LoginPage();
         loginPage.typeUsername("standard_user");
         loginPage.typePassword("secret_sauce");
         loginPage.clickLoginButton();
 
-        FooterPage footerPage = new FooterPage(driver);
+        FooterPage footerPage = new FooterPage();
         assertTrue(footerPage.isFooterSectionDisplayed());
 
     }

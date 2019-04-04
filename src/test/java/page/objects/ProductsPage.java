@@ -1,5 +1,6 @@
 package page.objects;
 
+import managers.DriverManager;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -18,9 +19,8 @@ public class ProductsPage {
 
     private WebDriver driver;
 
-    public ProductsPage(WebDriver driver){
-        this.driver = driver;
-        PageFactory.initElements(driver, this);
+    public ProductsPage(){
+        PageFactory.initElements(DriverManager.getWebDriver(), this);
     }
 
     public void addBackpackToCard() {
