@@ -5,6 +5,8 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.WebDriverWait;
+import waits.WaitForElement;
 
 public class LoginPage {
 
@@ -29,8 +31,8 @@ public class LoginPage {
         PageFactory.initElements(DriverManager.getWebDriver(), this);
     }
 
-
         public void typeUsername (String username){
+            WaitForElement.waitUntilElementIsVisible(usernameField);
             usernameField.clear();
             usernameField.sendKeys(username);
         }
@@ -41,11 +43,12 @@ public class LoginPage {
         }
 
         public void clickLoginButton () {
+            WaitForElement.waitUntilElementIsVisible(loginButton);
             loginButton.click();
         }
 
         public String getWarrningMessage () {
-
+        WaitForElement.waitUntilElementIsVisible(textWarrningMessage);
             String warrningMessage = textWarrningMessage.getText();
             return warrningMessage;
     }
