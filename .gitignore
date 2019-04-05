@@ -4,5 +4,8 @@
 *.ipr
 .idea/
 
+# Allure
+.allure/
+
 # Maven
 target/
