@@ -17,12 +17,12 @@ public class FailedLoginTest extends TestBase {
     public void loginWithIncorrectCredencials(){
 
         LoginPage loginPage = new LoginPage();
-        loginPage.typeUsername("standard_user");
-        loginPage.typePassword("incorrect_password");
-        loginPage.clickLoginButton();
+        loginPage
+                .typeUsername("standard_user")
+                .typePassword("incorrect_password")
+                .clickLoginButton();
+
         String warrningMessage = loginPage.getWarrningMessage();
-
         assertEquals(warrningMessage, "Epic sadface: Username and password do not match any user in this service");
-
     }
 }

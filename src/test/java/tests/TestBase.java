@@ -1,20 +1,33 @@
 package tests;
 
+import configuration.ConfigurationProperties;
+import configuration.PropertiesLoader;
+import managers.BrowserType;
 import managers.DriverManager;
 import managers.DriverUtils;
-import org.openqa.selenium.WebDriver;
-import org.testng.annotations.AfterMethod;
-import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.*;
+
+import java.util.Properties;
+
+import static navigation.ApplicationURLs.APPLICATION_URL;
 
 
 public class TestBase {
 
-    @BeforeMethod
-    public void beforeTest() {
+    @BeforeClass
+    public void beforeClass() {
+        PropertiesLoader propertiesLoader = new PropertiesLoader();
+        Properties propertiesFromFile = propertiesLoader.getPropertiesFromFile("configuration.properties");
+        ConfigurationProperties.setProperties(propertiesFromFile);
+    }
 
+    @Parameters("browser")
+    @BeforeMethod
+    public void beforeTest(@Optional BrowserType browserType) {
+        DriverManager.setWebDriver(browserType);
         DriverManager.getWebDriver();
         DriverUtils.setInitialConfiguration();
-        DriverUtils.navigateToPage("https://www.saucedemo.com/");
+        DriverUtils.navigateToPage(APPLICATION_URL);
     }
 
     @AfterMethod

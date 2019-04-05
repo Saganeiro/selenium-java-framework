@@ -20,4 +20,14 @@ public class WaitForElement {
         WebDriverWait webDriverWait = getWebDriverWait();
         webDriverWait.until(ExpectedConditions.elementToBeClickable(element));
     }
+
+    public void waitUntilIsNotVisible(WebElement element) {
+        WebDriverWait webDriverWait = getWebDriverWait();
+        webDriverWait.until(ExpectedConditions.not(ExpectedConditions.visibilityOf(element)));
+    }
+
+    public void waitUntilIsNotClickable(WebElement element) {
+        WebDriverWait webDriverWait = getWebDriverWait();
+        webDriverWait.until(ExpectedConditions.not(ExpectedConditions.elementToBeClickable(element)));
+    }
 }
