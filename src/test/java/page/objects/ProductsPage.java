@@ -1,6 +1,8 @@
 package page.objects;
 
 import managers.DriverManager;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -8,6 +10,8 @@ import org.openqa.selenium.support.PageFactory;
 import waits.WaitForElement;
 
 public class ProductsPage {
+
+    private Logger logger = LogManager.getRootLogger();
 
     @FindBy(xpath = "//*[contains(@class,'svg-inline--fa fa-shopping-cart fa-w-18 fa-3x')]")
     private WebElement imageShoppingCartEmpty;

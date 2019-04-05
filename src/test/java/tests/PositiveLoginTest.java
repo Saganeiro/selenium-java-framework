@@ -12,9 +12,10 @@ public class PositiveLoginTest extends TestBase {
     public void PositiveLoginTest(){
 
         LoginPage loginPage = new LoginPage();
-        loginPage.typeUsername("standard_user");
-        loginPage.typePassword("secret_sauce");
-        loginPage.clickLoginButton();
+        loginPage
+            .typeUsername("standard_user")
+            .typePassword("secret_sauce")
+            .clickLoginButton();
 
         FooterPage footerPage = new FooterPage();
         assertTrue(footerPage.isFooterSectionDisplayed());
