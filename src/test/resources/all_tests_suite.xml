@@ -2,6 +2,11 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
 <suite name="All Pet Store Tests">
 
+    <listeners>
+        <listener class-name="utils.testng.listeners.TestListener"/>
+        <listener class-name="utils.testng.listeners.AnnotationTransformer"/>
+    </listeners>
+
     <test name="Negative Login Tests">
         <parameter name="browser" value="FIREFOX"/>
         <classes>
