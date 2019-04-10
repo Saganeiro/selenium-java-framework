@@ -1,5 +1,6 @@
 package managers;
 
+import listeners.WebDriverEventListenerRegistrar;
 import org.openqa.selenium.WebDriver;
 
 import static configuration.TestRunProperties.getBrowserToRun;
@@ -15,30 +16,21 @@ public class DriverManager {
     private DriverManager() {
     }
 
-    //Metoda służy od ustawiania typu przeglądarki dla danego wątku
     public static void setWebDriver(BrowserType browserType) {
 
-        //Obiekt typu WebDriver, który w kolejnych liniach zostanie zainicjalizowany wywołaniem metody getBrowser() z klasy BrowserFactory
         WebDriver browser = null;
 
-        //Jeśli obiekt browserType będzie nullem, wtedy dla danego wątku zostanie wybrana przeglądarka zdefiniowana
-        // w pliku configuration.properties
         if (browserType == null) {
-
-            //Utworzenie instancji WebDrivera dla opcji gdy browserType jest nullem
-            //Zostanie wtedy wybrana przeglądarka zdefiniowana w pliku configuration.properties
             browserType = getBrowserToRun();
             browser = new BrowserFactory(browserType, getIsRemoteRun()).getBrowser();
         } else {
-            //Utworzenie instancji WebDrivera dla opcji gdy browserType nie jest nullem
-            //To znaczy, że został on zdefiniowany w pliku TestNG XML i możemy go używać
             browser = new BrowserFactory(browserType, getIsRemoteRun()).getBrowser();
         }
 
-        //Dodanie do puli instancji ThreadLocal za pomocą metody set() instancji klasy BrowserType
-        browserTypeThreadLocal.set(browserType);
+        //Rejestracja obiektu WebDrivera
+        browser = WebDriverEventListenerRegistrar.registerWebDriverEventListener(browser);
 
-        //Dodanie do puli instancji ThreadLocal za pomocą metody set() instancji klasy WebDriver
+        browserTypeThreadLocal.set(browserType);
         webDriverThreadLocal.set(browser);
     }
 

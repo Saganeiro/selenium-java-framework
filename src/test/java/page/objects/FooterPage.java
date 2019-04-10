@@ -7,27 +7,20 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import waits.WaitForElement;
 
-public class FooterPage {
+import static generic.assertions.AssertWebElement.assertThat;
 
-    private Logger logger = LogManager.getRootLogger();
+public class FooterPage extends BasePage {
 
     @FindBy(xpath = "//footer[@class='footer']")
     private WebElement footerSection;
 
-    private WebDriver driver;
-
-    public FooterPage(){
-
-        PageFactory.initElements(DriverManager.getWebDriver(), this);
-    }
-
-    public boolean isFooterSectionDisplayed(){
-
-        boolean isDisplayed = footerSection.isDisplayed();
-        logger.info("Returning status of banner after login: {}", isDisplayed);
-        return isDisplayed;
-
+    public FooterPage assertThatFooterSectionIsDisplayed(){
+        log().info("Checking if dog banner is displayed");
+        WaitForElement.waitUntilElementIsVisible(footerSection);
+        assertThat(footerSection).isDisplayed();
+        return this;
     }
 
 }

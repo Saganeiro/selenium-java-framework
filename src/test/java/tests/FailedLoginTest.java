@@ -21,8 +21,7 @@ public class FailedLoginTest extends TestBase {
                 .typeUsername("standard_user")
                 .typePassword("incorrect_password")
                 .clickLoginButton();
-
-        String warrningMessage = loginPage.getWarrningMessage();
-        assertEquals(warrningMessage, "Epic sadface: Username and password do not match any user in this service");
+        loginPage
+                .assertThatWarningIsDisplayed("Epic sadface: Username and password do not match any user in this service123");
     }
 }
