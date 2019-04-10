@@ -15,11 +15,7 @@ public class PositiveLoginTest extends TestBase {
         loginPage
             .typeUsername("standard_user")
             .typePassword("secret_sauce")
-            .clickLoginButton();
-
-        FooterPage footerPage = new FooterPage();
-        assertTrue(footerPage.isFooterSectionDisplayed());
-
+            .clickLoginButton()
+            .assertThatFooterSectionIsDisplayed();
     }
-
 }

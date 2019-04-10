@@ -1,5 +1,6 @@
 package page.objects;
 
+import generic.assertions.AssertWebElement;
 import managers.DriverManager;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -10,9 +11,7 @@ import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import waits.WaitForElement;
 
-public class LoginPage {
-
-    private Logger logger = LogManager.getRootLogger();
+public class LoginPage extends BasePage {
 
     @FindBy(xpath = "//div[@class='login_logo']")
     private WebElement loginLogoImage;
@@ -29,39 +28,33 @@ public class LoginPage {
     @FindBy(xpath = "//h3[@data-test='error']")
     private WebElement textWarrningMessage;
 
-    private WebDriver driver;
-
-    public LoginPage(){
-        PageFactory.initElements(DriverManager.getWebDriver(), this);
+    public LoginPage typeUsername (String username){
+        WaitForElement.waitUntilElementIsVisible(usernameField);
+        usernameField.clear();
+        usernameField.sendKeys(username);
+        log().info("Typed into User Name Field {}", username);
+        return this;
     }
 
-        public LoginPage typeUsername (String username){
-            WaitForElement.waitUntilElementIsVisible(usernameField);
-            usernameField.clear();
-            usernameField.sendKeys(username);
-            logger.info("Typed into User Name Field {}", username);
-            return this;
-        }
-
-        public LoginPage typePassword (String password){
-            passwordField.clear();
-            passwordField.sendKeys(password);
-            logger.info("Typed into Password Field {}", password);
-            return this;
-        }
-
-        public FooterPage clickLoginButton () {
-            logger.info("Trying to click Login Button");
-            WaitForElement.waitUntilElementIsVisible(loginButton);
-            loginButton.click();
-            logger.info("Clicked on Login Button");
-            return new FooterPage();
+    public LoginPage typePassword (String password){
+        passwordField.clear();
+        passwordField.sendKeys(password);
+        log().info("Typed into Password Field {}", password);
+        return this;
     }
 
-        public String getWarrningMessage () {
+    public FooterPage clickLoginButton () {
+        log().info("Trying to click Login Button");
+        WaitForElement.waitUntilElementIsVisible(loginButton);
+        loginButton.click();
+        log().info("Clicked on Login Button");
+        return new FooterPage();
+    }
+
+    public LoginPage assertThatWarningIsDisplayed(String warningMessage) {
+        log().info("Checking if warning message {} is displayed", warningMessage);
         WaitForElement.waitUntilElementIsVisible(textWarrningMessage);
-            String warrningMessage = textWarrningMessage.getText();
-            logger.info("Returned warning message was: {}", textWarrningMessage);
-            return warrningMessage;
+        AssertWebElement.assertThat(textWarrningMessage).isDisplayed().hasText(warningMessage);
+        return this;
     }
 }

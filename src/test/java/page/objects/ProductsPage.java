@@ -11,8 +11,6 @@ import waits.WaitForElement;
 
 public class ProductsPage {
 
-    private Logger logger = LogManager.getRootLogger();
-
     @FindBy(xpath = "//*[contains(@class,'svg-inline--fa fa-shopping-cart fa-w-18 fa-3x')]")
     private WebElement imageShoppingCartEmpty;
 
@@ -21,12 +19,6 @@ public class ProductsPage {
 
     @FindBy(xpath = "/html//div[@id='inventory_container']/div/div[@id='inventory_container']/div[@class='inventory_list']/div[1]/div[@class='pricebar']/button[.='ADD TO CART']")
     private WebElement buttonAddToCardBackpack;
-
-    private WebDriver driver;
-
-    public ProductsPage(){
-        PageFactory.initElements(DriverManager.getWebDriver(), this);
-    }
 
     public void addBackpackToCard() {
         WaitForElement.waitUntilElementIsClickable(buttonAddToCardBackpack);
